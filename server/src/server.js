@@ -7,7 +7,7 @@ import { PORT } from './config/serverConfig.js';
 
 const app = express();// created server instance
 const PORTNO = PORT || 5000;
-
+// Connect to database in ALL environments
 connectDB();
 
 app.use(cors({
@@ -23,6 +23,12 @@ app.get('/', (req, res)=>{
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
-app.listen(PORTNO, () => { // server started listening
-  console.log(`Server running on port ${PORTNO}`);
-});
+// Only run the server when not in production (Vercel handles this in production)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORTNO, () => {
+    console.log(`Server running on port ${PORTNO}`);
+  });
+}
+
+// Export the Express app for serverless functions
+export default app;
