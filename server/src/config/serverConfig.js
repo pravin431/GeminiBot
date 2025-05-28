@@ -1,22 +1,30 @@
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-// Convert ESM file URL to path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Load environment variables directly from multiple possible locations
+const envPaths = [
+  './.env',
+  '../.env',
+  '../../.env',
+  '../../../.env'
+];
 
-// Construct absolute paths to possible .env locations
-const serverPath = path.resolve(__dirname, '../../.env');  // This points to server/.env
-const rootPath = path.resolve(__dirname, '../../../.env'); // This points to the project root
+let loaded = false;
+for (const envPath of envPaths) {
+  try {
+    const result = dotenv.config({ path: envPath });
+    if (result.parsed) {
+      console.log(`Loaded environment variables from ${envPath}`);
+      loaded = true;
+      break;
+    }
+  } catch (e) {
+    // Continue to next path
+  }
+}
 
-console.log('Attempting to load .env from server directory:', serverPath);
-let result = dotenv.config({ path: serverPath });
-
-// If first attempt fails, try project root
-if (!result.parsed) {
-  console.log('Attempting to load .env from project root:', rootPath);
-  result = dotenv.config({ path: rootPath });
+if (!loaded) {
+  console.warn('Warning: Could not find .env file, using environment variables directly');
 }
 
 // Log environment variable status
