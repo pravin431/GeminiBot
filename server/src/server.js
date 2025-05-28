@@ -10,9 +10,15 @@ const PORTNO = PORT || 5000;
 
 connectDB();
 
-app.use(cors());// In server.js
+app.use(cors({
+  origin: 'https://gemini-bot-frontend.vercel.app', // Adjust this to your client URL
+  credentials: true, // Allow credentials if needed
+}));// In server.js
 app.use(express.json());  // This middleware is crucial for parsing JSON bodies
 
+app.get('/', (req, res)=>{
+  res.json({ message: 'Welcome to the Chat Application API' });
+})
 
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
