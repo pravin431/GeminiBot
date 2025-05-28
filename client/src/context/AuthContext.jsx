@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('https://gemini-bot-server.vercel.app/api/auth/login', { email, password });
       const { token } = response.data;
       setToken(token);
       localStorage.setItem('token', token);
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', { username, email, password });
+      const response = await axios.post('https://gemini-bot-server.vercel.app/api/auth/register', { username, email, password });
       console.log('Registration successful:', response.data);
 
       alert('Registration successful! Please log in.');

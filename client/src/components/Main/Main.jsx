@@ -14,7 +14,7 @@ const Main = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/chat/history', {
+        const response = await axios.get('https://gemini-bot-server.vercel.app/api/chat/history', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMessages(response.data);
@@ -32,7 +32,7 @@ const Main = () => {
     if (!input.trim()) return;
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/chat/message',
+        'https://gemini-bot-server.vercel.app/api/chat/message',
         { message: input },
         { headers: { Authorization: `Bearer ${token}` } }
       );

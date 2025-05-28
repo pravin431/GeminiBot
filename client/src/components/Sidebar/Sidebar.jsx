@@ -14,7 +14,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/chat/history', {
+        const response = await axios.get('https://gemini-bot-server.vercel.app/api/chat/history', {
           headers: { Authorization: `Bearer ${token}` },
         });
         const userMessages = response.data.filter((msg) => msg.role === 'user');
