@@ -11,7 +11,7 @@ const PORTNO = PORT || 5000;
 connectDB();
 
 app.use(cors({
-  origin: 'https://gemini-bot-frontend.vercel.app', // Adjust this to your client URL
+  origin: ['http://localhost:3000', 'https://gemini-bot-frontend.vercel.app'], // Adjust this to your client URL
   credentials: true, // Allow credentials if needed
 }));// In server.js
 app.use(express.json());  // This middleware is crucial for parsing JSON bodies
