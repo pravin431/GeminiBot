@@ -1,0 +1,80 @@
+:root {
+  --primary-bg: white;
+  --secondary-bg: white;
+  --sidebar-width: 280px;
+  --text-color: black;
+  --border-color: #4d4d4f;
+  --accent-color: #10a37f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--primary-bg);
+  line-height: 1.6;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Auth container (Login/Register) */
+.auth-container {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 20px;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 28px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--primary-bg);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  height: 100%;
+  background-color: var(--secondary-bg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
